@@ -16,7 +16,6 @@ const styles = EStyleSheet.create({
   },
   button: {
     alignSelf: 'flex-end',
-    // marginTop: 40,
     paddingVertical: 5,
     paddingHorizontal: 20
   },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
@@ -40,27 +40,29 @@ class Home extends Component {
       <Container>
         <StatusBar translucent={false} barStyle='light-content' />
         <Header onPress={this.optionsPress} />
-        <Logo />
-        <InputWithButton
-          onPress={this.pressBaseCurrency}
-          buttonText={TEMP_BASE_CURRENCY}
-          defaultValue={TEMP_BASE_PRICE}
-          keyboardType='numeric'
-          onChangeText={this.textChange}
-        />
-        <InputWithButton
-          onPress={this.pressQuoteCurrency}
-          buttonText={TEMP_QUOTE_CURRENCY}
-          editable={false}
-          value={TEMP_QUOTE_PRICE}
-        />
-        <LastConverted
-          base={TEMP_BASE_CURRENCY}
-          quote={TEMP_QUOTE_CURRENCY}
-          date={TEMP_CONVERSION_DATE}
-          conversionRate={TEMP_CONVERSION_RATE}
-        />
-        <ClearButton text='Reverse Currencies' onPress={this.swapCurrency} />
+        <KeyboardAvoidingView behavior='padding'>
+          <Logo />
+          <InputWithButton
+            onPress={this.pressBaseCurrency}
+            buttonText={TEMP_BASE_CURRENCY}
+            defaultValue={TEMP_BASE_PRICE}
+            keyboardType='numeric'
+            onChangeText={this.textChange}
+          />
+          <InputWithButton
+            onPress={this.pressQuoteCurrency}
+            buttonText={TEMP_QUOTE_CURRENCY}
+            editable={false}
+            value={TEMP_QUOTE_PRICE}
+          />
+          <LastConverted
+            base={TEMP_BASE_CURRENCY}
+            quote={TEMP_QUOTE_CURRENCY}
+            date={TEMP_CONVERSION_DATE}
+            conversionRate={TEMP_CONVERSION_RATE}
+          />
+          <ClearButton text='Reverse Currencies' onPress={this.swapCurrency} />
+        </KeyboardAvoidingView>
       </Container>
     );
   }
