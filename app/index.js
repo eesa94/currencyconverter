@@ -2,6 +2,7 @@ import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Home from './screens/Home';
 import CurrencyList from './screens/CurrencyList';
+import Options from './screens/Options';
 
 EStyleSheet.build({
   $primaryBlue: '#4f6d7a',
@@ -13,7 +14,8 @@ EStyleSheet.build({
   // $outline: 1
 });
 
-const Index = () => <Home />;
-const Currencies = () => <CurrencyList />;
+const indexScreen = () => <Home />;
+const currenciesScreen = () => <CurrencyList />;
+const optionsScreen = () => <Options />;
 
-export default Currencies;
+export default optionsScreen;
