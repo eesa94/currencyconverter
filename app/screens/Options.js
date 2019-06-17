@@ -1,4 +1,5 @@
 import React, { Component } from 'React';
+import PropTypes from 'prop-types';
 import { ScrollView, StatusBar, Platform } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +13,7 @@ const ICON_PREFIX = Platform.OS === 'ios' ? 'ios' : 'md';
 class Options extends Component {
   handleThemesPress = () => {
     console.log('press themes');
+    this.props.navigation.navigate('Themes');
   };
 
   handleSitePress = () => {
@@ -51,5 +53,9 @@ class Options extends Component {
     );
   }
 }
+
+Options.propTypes = {
+  navigation: PropTypes.object
+};
 
 export default Options;
