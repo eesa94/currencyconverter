@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
@@ -15,12 +16,17 @@ const TEMP_CONVERSION_RATE = 0.7974;
 const TEMP_CONVERSION_DATE = new Date();
 
 class Home extends Component {
+  // navigation
+  // because Home screen is being rendered via the createStackNavigator (config/routes.js) it has access to navigation.navigate on its props. this function takes in the name of a screen as a string
+
   pressBaseCurrency = () => {
     console.log('press base');
+    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
   pressQuoteCurrency = () => {
     console.log('press quote');
+    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
   };
 
   textChange = (text) => {
@@ -67,5 +73,9 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  navigation: PropTypes.object
+};
 
 export default Home;

@@ -4,6 +4,7 @@ import Home from './screens/Home';
 import CurrencyList from './screens/CurrencyList';
 import Options from './screens/Options';
 import Themes from './screens/Themes';
+import Navigator from './config/routes';
 
 EStyleSheet.build({
   $primaryBlue: '#4f6d7a',
@@ -22,5 +23,6 @@ const indexScreen = () => <Home />;
 const currenciesScreen = () => <CurrencyList />;
 const optionsScreen = () => <Options />;
 const themesScreen = () => <Themes />;
+const navigator = () => <Navigator />;
 
-export default themesScreen;
+export default navigator;

@@ -2,6 +2,7 @@ import React, { Component } from 'React';
 import { ScrollView, StatusBar, Platform } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { Ionicons } from '@expo/vector-icons';
+import { Container } from '../components/Container';
 import { Header } from '../components/Header';
 
 const ICON_COLOR = '#868686';

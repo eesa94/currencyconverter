@@ -23,7 +23,7 @@ class Themes extends Component {
         <ListItem
           text='Blue'
           onPress={() => {
-            this.handleThemePress(styles.$blue);
+            this.handleThemePress('blue');
           }}
           selected
           checkmark={false}
@@ -34,7 +34,7 @@ class Themes extends Component {
         <ListItem
           text='Orange'
           onPress={() => {
-            this.handleThemePress(styles.$orange);
+            this.handleThemePress('orange');
           }}
           selected
           checkmark={false}
@@ -44,7 +44,7 @@ class Themes extends Component {
         <ListItem
           text='Green'
           onPress={() => {
-            this.handleThemePress(styles.$green);
+            this.handleThemePress('green');
           }}
           selected
           checkmark={false}
@@ -54,7 +54,7 @@ class Themes extends Component {
         <ListItem
           text='Purple'
           onPress={() => {
-            this.handleThemePress(styles.$purple);
+            this.handleThemePress('purple');
           }}
           selected
           checkmark={false}
