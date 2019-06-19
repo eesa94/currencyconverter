@@ -1,10 +1,11 @@
 import React, { Component } from 'React';
 import PropTypes from 'prop-types';
-import { ScrollView, StatusBar, Platform } from 'react-native';
+import { ScrollView, StatusBar, Platform, Linking } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { Ionicons } from '@expo/vector-icons';
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
+import { connectAlert } from '../components/Alert';
 
 const ICON_COLOR = '#868686';
 const ICON_SIZE = 23;
@@ -18,6 +19,13 @@ class Options extends Component {
 
   handleSitePress = () => {
     console.log('press site');
+    Linking.openURL('httpqwe://fixer.io').catch(() =>
+      this.props.alertWithType(
+        'error',
+        'Sorry!',
+        'Fixer.io cant be opened right now'
+      )
+    );
   };
 
   render() {
@@ -55,7 +63,8 @@ class Options extends Component {
 }
 
 Options.propTypes = {
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  alertWithType: PropTypes.func
 };
 
-export default Options;
+export default connectAlert(Options);
