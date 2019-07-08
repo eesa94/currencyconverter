@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { ScrollView, StatusBar, Platform, Linking } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { Ionicons } from '@expo/vector-icons';
-import { Container } from '../components/Container';
 import { Header } from '../components/Header';
 import { connectAlert } from '../components/Alert';
 
@@ -19,7 +18,7 @@ class Options extends Component {
 
   handleSitePress = () => {
     console.log('press site');
-    Linking.openURL('httpqwe://fixer.io').catch(() =>
+    Linking.openURL('http://fixer.io').catch(() =>
       this.props.alertWithType(
         'error',
         'Sorry!',
