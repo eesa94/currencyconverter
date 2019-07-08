@@ -6,6 +6,8 @@ import Options from './screens/Options';
 import Themes from './screens/Themes';
 import Navigator from './config/routes';
 import { AlertProvider } from './components/Alert';
+import { Provider } from 'react-redux';
+import store from './config/store';
 
 EStyleSheet.build({
   $primaryBlue: '#4f6d7a',
@@ -27,7 +29,9 @@ const themesScreen = () => <Themes />;
 
 // export default indexScreen;
 export default () => (
-  <AlertProvider>
-    <Navigator />
-  </AlertProvider>
+  <Provider store={store}>
+    <AlertProvider>
+      <Navigator onNavigationStateChange={null} />
+    </AlertProvider>
+  </Provider>
 );
