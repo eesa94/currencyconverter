@@ -8,21 +8,24 @@ import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
-import { swapCurrency } from '../actions/currencies';
-import { changeCurrencyAmount } from '../actions/currencies';
+import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
 
 class Home extends Component {
   // navigation
   // because Home screen is being rendered via the createStackNavigator (config/routes.js) it has access to navigation.navigate on its props. this function takes in the name of a screen as a string
 
   pressBaseCurrency = () => {
-    console.log('press base');
-    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
+    this.props.navigation.navigate('CurrencyList', {
+      title: 'Base Currency',
+      type: 'base'
+    });
   };
 
   pressQuoteCurrency = () => {
-    console.log('press quote');
-    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
+    this.props.navigation.navigate('CurrencyList', {
+      title: 'Quote Currency',
+      type: 'quote'
+    });
   };
 
   handleChangeText = (text) => {
@@ -39,9 +42,18 @@ class Home extends Component {
   };
 
   render() {
-    let quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
-    if (this.props.isFetching) {
-      quotePrice: '...';
+    const {
+      isFetching,
+      amount,
+      conversionRate,
+      baseCurrency,
+      quoteCurrency,
+      lastConvertedDate
+    } = this.props;
+
+    let quotePrice = '...';
+    if (!isFetching) {
+      quotePrice = (amount * conversionRate).toFixed(2);
     }
 
     return (
@@ -52,22 +64,22 @@ class Home extends Component {
           <Logo />
           <InputWithButton
             onPress={this.pressBaseCurrency}
-            buttonText={this.props.baseCurrency}
-            defaultValue={this.props.amount.toString()}
+            buttonText={baseCurrency}
+            defaultValue={amount.toString()}
             keyboardType='numeric'
             onChangeText={this.handleChangeText}
           />
           <InputWithButton
             onPress={this.pressQuoteCurrency}
-            buttonText={this.props.quoteCurrency}
+            buttonText={quoteCurrency}
             editable={false}
             value={quotePrice}
           />
           <LastConverted
-            base={this.props.baseCurrency}
-            quote={this.props.quoteCurrency}
-            date={this.props.lastConvertedDate}
-            conversionRate={this.props.conversionRate}
+            base={baseCurrency}
+            quote={quoteCurrency}
+            date={lastConvertedDate}
+            conversionRate={conversionRate}
           />
           <ClearButton
             text='Reverse Currencies'
@@ -86,8 +98,8 @@ Home.propTypes = {
   quoteCurrency: PropTypes.string,
   amount: PropTypes.number,
   conversionRate: PropTypes.number,
-  isFetching: PropTypes.bool,
-  lastConvertedDate: PropTypes.object
+  lastConvertedDate: PropTypes.object,
+  isFetching: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
@@ -101,10 +113,10 @@ const mapStateToProps = (state) => {
     quoteCurrency,
     amount: state.currencies.amount,
     conversionRate: rates[quoteCurrency] || 0,
-    isFetching: conversionSelector.isFetching,
     lastConvertedDate: conversionSelector.date
       ? new Date(conversionSelector.date)
-      : new Date()
+      : new Date(),
+    isFetching: conversionSelector.isFetching
   };
 };
 
