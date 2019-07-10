@@ -6,8 +6,6 @@ import { ListItem, Separator } from '../components/List';
 import { changeBaseCurrency, changeQuoteCurrency } from '../actions/currencies';
 import { connect } from 'react-redux';
 
-const TEMP_CURRENT_CURRENCY = 'CAD';
-
 class CurrencyList extends Component {
   handlePress = (currency) => {
     const { type } = this.props.navigation.state.params;
