@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import {
   View,
   ImageBackground,
@@ -77,7 +78,11 @@ class Logo extends Component {
       { width: this.containerImageWidth, height: this.containerImageWidth }
     ];
 
-    const imageStyle = [styles.logo, { width: this.imageWidth }];
+    const imageStyle = [
+      styles.logo,
+      { width: this.imageWidth },
+      this.props.tintColor ? { tintColor: this.props.tintColor } : null
+    ];
 
     return (
       <View style={styles.container}>
@@ -99,5 +104,9 @@ class Logo extends Component {
     );
   }
 }
+
+Logo.propTypes = {
+  tintColor: PropTypes.string
+};
 
 export default Logo;
