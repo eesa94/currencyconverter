@@ -8,11 +8,29 @@ import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
-import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+import {
+  swapCurrency,
+  changeCurrencyAmount,
+  getInitialConversion
+} from '../actions/currencies';
+import { connectAlert } from '../components/Alert';
 
 class Home extends Component {
   // navigation
   // because Home screen is being rendered via the createStackNavigator (config/routes.js) it has access to navigation.navigate on its props. this function takes in the name of a screen as a string
+
+  componentDidMount() {
+    this.props.dispatch(getInitialConversion());
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.currencyerror &&
+      nextProps.currencyError !== this.props.currencyError
+    ) {
+      this.props.alertWithType('error', 'Error', nextProps.currencyError);
+    }
+  }
 
   pressBaseCurrency = () => {
     this.props.navigation.navigate('CurrencyList', {
@@ -103,7 +121,9 @@ Home.propTypes = {
   conversionRate: PropTypes.number,
   lastConvertedDate: PropTypes.object,
   isFetching: PropTypes.bool,
-  primaryColor: PropTypes.string
+  primaryColor: PropTypes.string,
+  alertWithType: PropTypes.func,
+  currencyError: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
@@ -121,8 +141,9 @@ const mapStateToProps = (state) => {
       ? new Date(conversionSelector.date)
       : new Date(),
     isFetching: conversionSelector.isFetching,
-    primaryColor: state.theme.primaryColor
+    primaryColor: state.theme.primaryColor,
+    currencyError: state.currencies.error
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(connectAlert(Home));
